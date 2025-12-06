@@ -1,0 +1,62 @@
+# AWS Credentials - NEVER commit these!
+*.pem
+*.key
+.aws/
+credentials
+config
+*.csv
+
+# AWS Access Keys (if you downloaded them)
+*credentials*.csv
+*accessKeys*.csv
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Node.js (for React later)
+node_modules/
+npm-debug.log*
+.npm
+build/
+dist/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.log
+*.tmp
+temp/
+tmp/
+
+# Sensitive Data
+secrets/
+private/
+confidential/
+
+# Personal notes
+notes.txt
+todo.txt
+scratch.md
