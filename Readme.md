@@ -865,8 +865,8 @@ I'm a cloud enthusiast documenting my journey from foundational concepts to buil
 
 **Connect with Me:**
 - **GitHub:** [@hemanthbobba24](https://github.com/hemanthbobba24)
-- **LinkedIn:** [Hemanth Sri Ram](https://linkedin.com/in/yourprofile) _(update link)_
-- **Email:** your.email@example.com _(update email)_
+- **LinkedIn:** [Hemanth Sri Ram](https://www.linkedin.com/in/hemanth-bobba-5ba445237/)
+- **Email:** hemanthbobba246@gmail.com
 
 ---
 
@@ -906,20 +906,20 @@ If this project helped you learn serverless architecture or AWS, please:
 ## 📸 Screenshots
 
 ### Home Page - Restaurant List
-![Restaurant List](screenshots/restaurant-list.png)
-*Browse available restaurants with ratings and cuisine types*
+<img width="1365" height="722" alt="image" src="https://github.com/user-attachments/assets/8f46513d-c08c-4f72-9055-dcb434ee9e9e" />
+
 
 ### Menu Page
-![Menu Page](screenshots/menu-page.png)
-*View detailed menu items with prices and descriptions*
+<img width="1365" height="721" alt="image" src="https://github.com/user-attachments/assets/0e7ab906-b168-4c4a-bd44-16b92b3ef3d6" />
+
 
 ### Shopping Cart
-![Shopping Cart](screenshots/shopping-cart.png)
-*Review items, adjust quantities, and place orders*
+<img width="1365" height="721" alt="image" src="https://github.com/user-attachments/assets/9326b77a-2db8-4f62-8a83-f79d91347ebd" />
+
 
 ### My Orders
-![My Orders](screenshots/my-orders.png)
-*Track order history and real-time status updates*
+<img width="1365" height="719" alt="image" src="https://github.com/user-attachments/assets/dadea301-6161-476f-b979-aaf509f1be91" />
+
 
 ---
 
