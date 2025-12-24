@@ -78,19 +78,26 @@ function MenuPage() {
         <div className="menu-grid">
           {menuItems.map((item) => (
             <div key={item.menuItemId} className="menu-item-card">
-              <div className="menu-item-header">
-                <h3>{item.name}</h3>
-                <span className="price">${item.price}</span>
-              </div>
-              <p className="description">{item.description}</p>
-              <p className="category">{item.category}</p>
-              <button 
-                className="add-to-cart-btn"
-                onClick={() => handleAddToCart(item)}
-              >
-                Add to Cart
-              </button>
-            </div>
+  {item.imageUrl && (
+    <img 
+      src={item.imageUrl} 
+      alt={item.name}
+      className="menu-item-image"
+    />
+  )}
+  <div className="menu-item-header">
+    <h3>{item.name}</h3>
+    <span className="price">${item.price}</span>
+  </div>
+  <p className="description">{item.description}</p>
+  <p className="category">{item.category}</p>
+  <button 
+    className="add-to-cart-btn"
+    onClick={() => handleAddToCart(item)}
+  >
+    Add to Cart
+  </button>
+</div>
           ))}
         </div>
       </div>

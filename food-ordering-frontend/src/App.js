@@ -5,6 +5,7 @@ import MenuPage from './components/MenuPage';
 import { CartProvider } from './context/CartContext';
 import CartPage from './components/CartPage';
 import MyOrdersPage from './components/MyOrdersPage';
+import SearchByPhoto from './components/SearchByPhoto';
 import './App.css';
 
 const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
@@ -63,34 +64,49 @@ function RestaurantList() {
   return (
     <div>
       <header className="header">
-        <h1>🍕 Food Ordering Platform</h1>
-        <p>Choose your favorite restaurant</p>
-        <button 
-          className="my-orders-link"
-          onClick={() => navigate('/orders')}
-        >
-          📦 My Orders
-        </button>
-      </header>
+  <h1>🍕 Food Ordering Platform</h1>
+  <p>Choose your favorite restaurant</p>
+  <div className="header-buttons">
+    <button 
+      className="search-photo-link"
+      onClick={() => navigate('/search-photo')}
+    >
+      📸 Search by Photo
+    </button>
+    <button 
+      className="my-orders-link"
+      onClick={() => navigate('/orders')}
+    >
+      📦 My Orders
+    </button>
+  </div>
+</header>
 
       <div className="container">
         <div className="restaurant-grid">
           {restaurants.map((restaurant) => (
             <div key={restaurant.restaurantId} className="restaurant-card">
-              <div className="restaurant-header">
-                <h2>{restaurant.name}</h2>
-                <span className="rating">⭐ {restaurant.rating}</span>
-              </div>
-              <p className="cuisine">{restaurant.cuisine}</p>
-              <p className="address">📍 {restaurant.address}</p>
-              <p className="phone">📞 {restaurant.phone}</p>
-              <button 
-                className="view-menu-btn"
-                onClick={() => handleViewMenu(restaurant.restaurantId)}
-              >
-                View Menu
-              </button>
-            </div>
+  {restaurant.imageUrl && (
+    <img 
+      src={restaurant.imageUrl} 
+      alt={restaurant.name}
+      className="restaurant-image"
+    />
+  )}
+  <div className="restaurant-header">
+    <h2>{restaurant.name}</h2>
+    <span className="rating">⭐ {restaurant.rating}</span>
+  </div>
+  <p className="cuisine">{restaurant.cuisine}</p>
+  <p className="address">📍 {restaurant.address}</p>
+  <p className="phone">📞 {restaurant.phone}</p>
+  <button 
+    className="view-menu-btn"
+    onClick={() => handleViewMenu(restaurant.restaurantId)}
+  >
+    View Menu
+  </button>
+</div>
           ))}
         </div>
       </div>
@@ -108,6 +124,7 @@ function App() {
             <Route path="/menu/:restaurantId" element={<MenuPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/orders" element={<MyOrdersPage />} />
+            <Route path="/search-photo" element={<SearchByPhoto />} />
           </Routes>
         </div>
       </Router>
