@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
 
 function MyOrdersPage() {
   const navigate = useNavigate();
+  const { user } = useAuth(); 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Hard-coded customer ID for now (will use Cognito later)
-  const customerId = 'customer-999';
 
   useEffect(() => {
     fetchOrders();
@@ -24,7 +24,7 @@ function MyOrdersPage() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/orders?customerId=${customerId}`);
+      const response = await axios.get(`${API_BASE_URL}/orders?customerId=${user.email}`);
       setOrders(response.data.orders || []);
       setLoading(false);
     } catch (err) {

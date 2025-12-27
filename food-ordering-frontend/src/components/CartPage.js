@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
-
 const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
 
 function CartPage() {
@@ -15,6 +15,7 @@ function CartPage() {
     getCartTotal, 
     clearCart 
   } = useCart();
+  const {user} = useAuth();
 
   const handlePlaceOrder = async () => {
     if (cartItems.length === 0) {
@@ -24,7 +25,7 @@ function CartPage() {
 
     try {
       const orderData = {
-        customerId: 'customer-999', // Hard-coded for now (will use Cognito later)
+        customerId: user.email, // Hard-coded for now (will use Cognito later)
         restaurantId: restaurantInfo.restaurantId,
         restaurantName: restaurantInfo.name,
         orderItems: cartItems.map(item => ({

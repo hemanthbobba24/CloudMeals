@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MenuPage from './components/MenuPage';
@@ -7,11 +8,53 @@ import CartPage from './components/CartPage';
 import MyOrdersPage from './components/MyOrdersPage';
 import SearchByPhoto from './components/SearchByPhoto';
 import './App.css';
+import { Amplify } from 'aws-amplify';
+import awsConfig from './aws-config';
+import { AuthProvider } from './context/AuthContext';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
+import RestaurantDashboard from './components/RestaurantDashboard';
+import AdminDashboard from './components/AdminDashboard';
+
+// Configure Amplify
+Amplify.configure(awsConfig);
 
 const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
 
+// Role-based home page router
+function RoleBasedHome() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '1.5rem',
+        color: '#667eea'
+      }}>
+        Loading...
+      </div>
+    );
+  }
+
+  // Route based on user's role
+  if (user?.role === 'Admins') {
+    return <AdminDashboard />;
+  } else if (user?.role === 'Restaurants') {
+    return <RestaurantDashboard />;
+  } else {
+    // Default: Customers
+    return <RestaurantList />;
+  }
+}
+
 function RestaurantList() {
   const navigate = useNavigate();
+  const { user, logout, isAuthenticated } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,6 +75,10 @@ function RestaurantList() {
       console.error('Error fetching restaurants:', err);
     }
   };
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+    };
 
   const handleViewMenu = (restaurantId) => {
     navigate(`/menu/${restaurantId}`);
@@ -64,8 +111,20 @@ function RestaurantList() {
   return (
     <div>
       <header className="header">
-  <h1>🍕 Food Ordering Platform</h1>
-  <p>Choose your favorite restaurant</p>
+  <div className="header-top">
+    <div>
+      <h1>🍕 Food Ordering Platform</h1>
+      <p>Choose your favorite restaurant</p>
+    </div>
+    {isAuthenticated && (
+      <div className="user-info">
+        <span>👤 Welcome, {user?.name || 'Guest'}!</span>
+        <button onClick={handleLogout} className="logout-btn">
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
   <div className="header-buttons">
     <button 
       className="search-photo-link"
@@ -116,19 +175,47 @@ function RestaurantList() {
 
 function App() {
   return (
+    <AuthProvider>
     <CartProvider>
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<RestaurantList />} />
-            <Route path="/menu/:restaurantId" element={<MenuPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/orders" element={<MyOrdersPage />} />
-            <Route path="/search-photo" element={<SearchByPhoto />} />
-          </Routes>
+  <Route path="/login" element={<Login />} />
+  <Route path="/signup" element={<Signup />} />
+  
+  {/* Protected Routes - Role-based home */}
+  <Route path="/" element={
+    <ProtectedRoute>
+      <RoleBasedHome />
+    </ProtectedRoute>
+  } />
+  
+  {/* Customer Routes */}
+  <Route path="/menu/:restaurantId" element={
+    <ProtectedRoute>
+      <MenuPage />
+    </ProtectedRoute>
+  } />
+  <Route path="/cart" element={
+    <ProtectedRoute>
+      <CartPage />
+    </ProtectedRoute>
+  } />
+  <Route path="/orders" element={
+    <ProtectedRoute>
+      <MyOrdersPage />
+    </ProtectedRoute>
+  } />
+  <Route path="/search-photo" element={
+    <ProtectedRoute>
+      <SearchByPhoto />
+    </ProtectedRoute>
+  } />
+</Routes>
         </div>
       </Router>
     </CartProvider>
+    </AuthProvider>
   );
 }
 
