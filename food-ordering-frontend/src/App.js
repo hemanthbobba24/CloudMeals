@@ -16,11 +16,14 @@ import Signup from './components/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import RestaurantDashboard from './components/RestaurantDashboard';
 import AdminDashboard from './components/AdminDashboard';
+import { getRestaurantId, getRestaurantName } from './config/restaurantMapping';
+import AddMenuItem from './components/AddMenuItem';
+import EditMenuItem from './components/EditMenuItem';
 
 // Configure Amplify
 Amplify.configure(awsConfig);
 
-const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
+const API_BASE_URL = 'https://zdyiz75g5a.execute-api.us-east-2.amazonaws.com/dev';
 
 // Role-based home page router
 function RoleBasedHome() {
@@ -211,6 +214,16 @@ function App() {
       <SearchByPhoto />
     </ProtectedRoute>
   } />
+  <Route path="/restaurant/add-menu-item" element={
+  <ProtectedRoute>
+    <AddMenuItem />
+  </ProtectedRoute>
+} />
+<Route path="/restaurant/edit-menu-item/:menuItemId" element={
+  <ProtectedRoute>
+    <EditMenuItem />
+  </ProtectedRoute>
+} />
 </Routes>
         </div>
       </Router>

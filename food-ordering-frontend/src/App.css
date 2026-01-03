@@ -1011,7 +1011,7 @@ body {
 }
 
 .user-info span {
-  color: white;
+  color: gray;
   font-weight: 600;
 }
 
@@ -1228,4 +1228,550 @@ body {
   min-height: 100vh;
   font-size: 1.5rem;
   color: #667eea;
+}
+/* Menu Management */
+.add-menu-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.add-menu-btn:hover {
+  opacity: 0.9;
+}
+
+.menu-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.menu-item-card-dashboard {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: white;
+}
+
+.menu-item-card-dashboard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.menu-item-card-dashboard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.menu-item-info {
+  padding: 1rem;
+}
+
+.menu-item-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.menu-item-info p {
+  margin: 0.25rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.item-category {
+  color: #667eea !important;
+  font-weight: 600;
+  font-size: 0.85rem !important;
+  text-transform: uppercase;
+}
+
+.item-price {
+  font-size: 1.3rem !important;
+  font-weight: bold !important;
+  color: #10b981 !important;
+  margin: 0.5rem 0 !important;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.edit-btn, .delete-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.edit-btn {
+  background: #667eea;
+  color: white;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  opacity: 0.9;
+}
+/* Form Container */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.menu-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Image Upload */
+.image-upload-container {
+  margin-top: 0.5rem;
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.image-upload-placeholder {
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.image-upload-placeholder:hover {
+  border-color: #667eea;
+}
+
+.upload-label {
+  cursor: pointer;
+  display: block;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.upload-label p {
+  color: #333;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.upload-label small {
+  color: #999;
+}
+
+/* Form Fields */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.menu-item-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.menu-item-form textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.menu-item-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+.menu-item-form select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.cancel-btn, .submit-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.cancel-btn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.cancel-btn:hover, .submit-btn:hover {
+  opacity: 0.9;
+}
+
+.cancel-btn:disabled, .submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Allergen Detection */
+.allergen-detecting {
+  text-align: center;
+  padding: 1rem;
+  background: #f0f9ff;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.allergen-detecting .spinner {
+  font-size: 2rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.allergen-results {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.allergen-results h4 {
+  margin: 0 0 1rem 0;
+  color: #667eea;
+  font-size: 1rem;
+}
+
+.allergen-results h5 {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Dietary Badges */
+.dietary-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-vegan {
+  background: #10b981;
+  color: white;
+}
+
+.badge-vegetarian {
+  background: #22c55e;
+  color: white;
+}
+
+.badge-gluten-free {
+  background: #f59e0b;
+  color: white;
+}
+
+/* Allergen Warning */
+.allergen-warning {
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.allergen-chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.allergen-chip {
+  background: #ef4444;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.allergen-safe {
+  background: #d1fae5;
+  border: 2px solid #10b981;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.allergen-safe p {
+  margin: 0;
+  color: #065f46;
+  font-weight: 600;
+}
+
+/* Safety Score */
+.safety-score {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.safety-score strong {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.score-high {
+  color: #10b981;
+}
+
+.score-medium {
+  color: #f59e0b;
+}
+
+.score-low {
+  color: #ef4444;
+}
+/* Image Upload Placeholder - THE KEY CSS */
+.image-upload-placeholder {
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.image-upload-placeholder:hover {
+  border-color: #667eea;
+  background-color: #eef2ff;
+}
+
+.upload-label {
+  cursor: pointer;
+  display: block;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.upload-label p {
+  color: #333;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.upload-label small {
+  color: #999;
+}
+.current-image {
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem 0;
+}
+
+.current-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+}
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.confirmed {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.status-badge.preparing {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-badge.ready {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+/* Order Status Dropdown */
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.status-select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 150px;
+}
+
+.status-select:hover {
+  border-color: #667eea;
+}
+
+.status-select.pending {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fbbf24;
+}
+
+.status-select.confirmed {
+  background: #dbeafe;
+  color: #1e3a8a;
+  border-color: #60a5fa;
+}
+
+.status-select.preparing {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-color: #818cf8;
+}
+
+.status-select.ready {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #34d399;
+}
+
+.status-select.completed {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #10b981;
+}
+
+.status-select.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #f87171;
+}
+
+.order-items-list {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.order-item-detail {
+  margin: 0.25rem 0;
+}
+
+.order-total {
+  font-size: 1.1rem;
+  color: #333;
 }

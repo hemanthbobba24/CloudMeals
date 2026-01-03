@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
+
+const API_BASE_URL = 'https://zdyiz75g5a.execute-api.us-east-2.amazonaws.com/dev';
 
 function SearchByPhoto() {
   const navigate = useNavigate();
@@ -42,6 +43,8 @@ function SearchByPhoto() {
           
           // Step 2: Upload to S3
           console.log('Uploading image to S3...');
+          console.log('Upload URL:', `${API_BASE_URL}/upload-image`);
+          
           const uploadResponse = await axios.post(`${API_BASE_URL}/upload-image`, {
             imageData: base64Image,
             fileName: selectedFile.name
@@ -52,6 +55,9 @@ function SearchByPhoto() {
           
           // Step 3: Analyze with Rekognition
           console.log('Analyzing image with AI...');
+          console.log('Recognition URL:', `${API_BASE_URL}/recognize-food`);
+          console.log('With payload:', { imageUrl: imageUrl });
+          
           const recognitionResponse = await axios.post(`${API_BASE_URL}/recognize-food`, {
             imageUrl: imageUrl
           });
@@ -60,7 +66,8 @@ function SearchByPhoto() {
           setResults(recognitionResponse.data);
           setLoading(false);
         } catch (err) {
-          console.error('Error:', err);
+          console.error('Error details:', err);
+          console.error('Error response:', err.response);
           setError('Failed to analyze image. Please try again.');
           setLoading(false);
         }

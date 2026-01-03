@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useAuth} from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
-const API_BASE_URL = 'https://itsw9q2cyj.execute-api.us-east-2.amazonaws.com/dev';
+const API_BASE_URL = 'https://zdyiz75g5a.execute-api.us-east-2.amazonaws.com/dev';
 
 function CartPage() {
   const navigate = useNavigate();
@@ -16,37 +16,78 @@ function CartPage() {
     clearCart 
   } = useCart();
   const {user} = useAuth();
-
+  const [loading, setLoading] = useState(false)
   const handlePlaceOrder = async () => {
-    if (cartItems.length === 0) {
-      alert('Your cart is empty!');
-      return;
-    }
-
-    try {
+  try {
+    setLoading(true);
+    
+    // Fetch all restaurants to get names
+    const restaurantsRes = await axios.get(`${API_BASE_URL}/restaurants`);
+    const allRestaurants = restaurantsRes.data.restaurants || [];
+    
+    console.log('🏪 All restaurants:', allRestaurants);
+    
+    // Group items by restaurant
+    const restaurantGroups = {};
+    cartItems.forEach(item => {
+      const restId = item.restaurantId;
+      if (!restaurantGroups[restId]) {
+        // Find restaurant name
+        const restaurant = allRestaurants.find(r => r.restaurantId === restId);
+        
+        console.log(`🔍 Looking for restaurant ${restId}, found:`, restaurant);
+        
+        restaurantGroups[restId] = {
+          restaurantId: restId,
+          restaurantName: restaurant ? restaurant.name : 'Unknown Restaurant',
+          items: []
+        };
+      }
+      restaurantGroups[restId].items.push({
+        menuItemId: item.menuItemId,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        restaurantId: item.restaurantId
+      });
+    });
+    
+    console.log('📦 Restaurant groups:', restaurantGroups);
+    
+    // Create order for each restaurant
+    for (const restId in restaurantGroups) {
+      const group = restaurantGroups[restId];
+      const restaurantTotal = group.items.reduce((sum, item) => 
+        sum + (item.price * item.quantity), 0
+      );
+      
       const orderData = {
-        customerId: user.email, // Hard-coded for now (will use Cognito later)
-        restaurantId: restaurantInfo.restaurantId,
-        restaurantName: restaurantInfo.name,
-        orderItems: cartItems.map(item => ({
-          menuItemId: item.menuItemId,
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price
-        })),
-        totalAmount: getCartTotal()
+        customerId: user.email,
+        restaurantId: group.restaurantId,
+        restaurantName: group.restaurantName,  // ✅ THIS WAS MISSING!
+        orderItems: group.items,
+        totalAmount: restaurantTotal
       };
-
+      
+      console.log('📦 Sending order:', JSON.stringify(orderData, null, 2));
+      
       const response = await axios.post(`${API_BASE_URL}/orders`, orderData);
       
-      alert(`Order placed successfully! Order ID: ${response.data.orderId}`);
-      clearCart();
-      navigate('/');
-    } catch (error) {
-      console.error('Error placing order:', error);
-      alert('Failed to place order. Please try again.');
+      console.log('✅ Order created:', response.data);
     }
-  };
+    
+    alert('Order placed successfully!');
+    clearCart();
+    navigate('/orders');
+    
+  } catch (error) {
+    console.error('❌ Error placing order:', error);
+    console.error('❌ Error response:', error.response?.data);
+    alert('Failed to place order. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (cartItems.length === 0) {
     return (
