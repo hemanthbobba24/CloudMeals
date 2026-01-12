@@ -12,7 +12,7 @@ Current Phase: ✅ Deployed to Production
 
 🌟 Live Demo
 🔗 Application: http://cloudmeals-app.s3-website.us-east-2.amazonaws.com
-📂 GitHub: https://github.com/hemanthbobba24/CloudMeals
+
 
 👤 Test Accounts:
 Customer: customer@test.com / Customer123!
